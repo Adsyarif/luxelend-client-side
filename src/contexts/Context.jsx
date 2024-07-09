@@ -1,19 +1,21 @@
 import { createContext, useState } from "react";
 
 const defaultValue = {
+  user: undefined,
+  setUser: undefined,
+};
+
+const initialValue = {
   gender: undefined,
-  setGender: undefined,
-  category: [],
-  setCategory: undefined,
+  category: undefined,
 };
 
 export const AppContext = createContext(defaultValue);
 
 export const AppContextProvider = ({ children }) => {
-  const [gender, setGender] = useState(undefined);
-  const [category, setCategory] = useState([]);
+  const [user, setUser] = useState(initialValue);
 
-  const value = { gender, setGender, category, setCategory };
+  const value = { user, setUser };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };
