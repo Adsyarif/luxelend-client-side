@@ -5,9 +5,12 @@ export default {
   theme: {
     extend: {},
     colors: {
-      categoryYellow: "#F9E29A",
-      black: "#000",
-      white: "#ffffff",
+      lightBrown: "#F9E29A",
+      black: "#011224",
+      white: "#FFFEFF",
+      aqua: "#A0D2FF",
+      darkBlue: "#20386B",
+      darkBrown: "#EFB01F",
     },
   },
   plugins: [

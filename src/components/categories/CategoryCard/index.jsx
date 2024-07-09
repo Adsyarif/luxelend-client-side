@@ -9,7 +9,7 @@ const CategoryCard = ({ items, gender }) => {
         <div className="py-2 flex justify-center">
           <h2 className="font-bold">{gender}</h2>
         </div>
-        <ListCard items={items} />
+        <ListCard items={items} gender={gender} />
       </div>
     </div>
   );

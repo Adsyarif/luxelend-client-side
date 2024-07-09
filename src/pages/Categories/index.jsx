@@ -15,9 +15,9 @@ const Categories = () => {
   };
 
   return (
-    <div className="max-w-screen-sm md:mx-auto md:max-w-2xl">
+    <div className="max-w-screen-sm mx-auto md:max-w-2xl">
       <Header />
-      <BackButton />
+      <BackButton isText={true} />
       <CategoryCard items={data.category.women} gender={"Women"} />
       <CategoryCard items={data.category.men} gender={"Men"} />
     </div>
