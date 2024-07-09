@@ -1,14 +1,29 @@
-import { Card } from "../Card";
-import searchImg from "../../../assets/image/search.png";
+const Header = () => {
+  return (
+    <div className="bg-black p-4">
+      <div className="flex flex-wrap w-full justify-center items-center">
+        <div className="w-11/12 text-center ">
+          <h1 className="text-lg tracking-widest text-gradient">LUXELEND</h1>
+        </div>
+        <button className="w-1/12" onClick={() => {}}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="size-6 text-white"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+  );
+};
 
-export function Header() {
-    return (
-        <Card className="top-0 sticky h-20 border-none bg-gray-900 flex justify-around items-center">
-            <span className="invisible">0</span>
-            <p className="bg-gradient-to-r from-amber-200 to-yellow-500 text-transparent bg-clip-text font-semibold text-3xl tracking-widest text-center">
-                LUXELEND
-            </p>
-            <img src={searchImg} alt="" className="right-0 text-right size-4" />
-        </Card>
-    );
-}
+export default Header;
