@@ -9,7 +9,7 @@ yarn dev
 ## Pages
 
 -   Homepage = "/"
-    ![Home Page](./src/assets/doc/initialHomePagePreview.PNG)
+    ![Home Page](./src/assets/doc/HomePagePreview.PNG)
 -   Genderpage = "/gender"
      <!-- ![Gender Page](./src/assets/doc/genderPagePreview.png) -->
 
