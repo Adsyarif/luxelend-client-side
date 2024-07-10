@@ -1,11 +1,15 @@
+import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Product } from "./pages/product";
 
-const App = () => {
+function App() {
   return (
     <BrowserRouter>
-      <Routes></Routes>
+      <Routes>
+        <Route path="/product" element={<Product />} />
+      </Routes>
     </BrowserRouter>
   );
-};
+}
 
 export default App;
