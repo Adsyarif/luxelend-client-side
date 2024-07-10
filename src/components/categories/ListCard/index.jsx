@@ -1,7 +1,7 @@
 // import { Button } from "../../Components";
 import { Navigate } from "react-router-dom";
 import { AppContext } from "../../../contexts/Context";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 
 const ListCard = ({ items, gender }) => {
   const { user, setUser } = useContext(AppContext);
@@ -17,13 +17,13 @@ const ListCard = ({ items, gender }) => {
 
   return (
     <>
-      {user.category && <Navigate to={path.join("/").toLowerCase()} />}
+      {/* {user.category && <Navigate to={path.join("/").toLowerCase()} />} */}
       <div className="grid grid-cols-2 w-80 mx-auto">
         {items.map((item, index) => (
           <button
             key={index}
             onClick={() => selectCategory(item, gender)}
-            className="text-start text-sm p-2 hover:bg-categoryYellow w-40"
+            className="text-start text-sm p-2 hover:bg-lightBrown w-40"
           >
             {item}
           </button>
