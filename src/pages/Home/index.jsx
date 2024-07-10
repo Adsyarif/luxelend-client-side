@@ -1,4 +1,4 @@
-import { Header } from "../../components/common/Header";
+import { Header } from "../../components/common";
 import { Card } from "../../components/common/Card";
 import { WelcomeBanner } from "../../components/Home/WelcomeBanner";
 import { Button } from "../../components/common/Button";
