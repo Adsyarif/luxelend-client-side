@@ -1,4 +1,8 @@
+import { useNavigate } from "react-router-dom";
+
 const BackButton = ({ isText }) => {
+  const navigate = useNavigate();
+
   const handleLeft = () => {
     navigate(-1);
   };
