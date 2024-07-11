@@ -1,9 +1,7 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-// import { GenderPage } from "./pages/categoryGender/gender";
-import { HomePages } from "./pages/Home";
-import { Categories } from "./pages";
-import { Product } from "./pages/product";
+import {} from "./pages/Home";
+import { HomePages, ProductPage, Categories } from "./pages";
 
 function App() {
   return (
@@ -11,8 +9,8 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePages />} />
         <Route path="/category" element={<Categories />} />
-        <Route path="/product" element={<Product />} />
-        {/* <Route path="/gender" element={<GenderPage />} /> */}
+        <Route path="/:gender" element={<ProductPage />} />
+        <Route path="/:gender/:category" element={<ProductPage />} />
       </Routes>
     </BrowserRouter>
   );

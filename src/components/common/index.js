@@ -4,3 +4,4 @@ export { default as Header } from "./Header";
 export * from "./Button";
 export * from "./Card";
 export * from "./NavbarButton";
+export * from "./bottomNavbar";
