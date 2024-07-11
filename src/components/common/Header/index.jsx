@@ -2,12 +2,15 @@ const Header = () => {
     return (
         <div className="bg-black p-4">
             <div className="flex flex-wrap w-full justify-center items-center">
-                <div className="w-11/12 text-center ">
+                <div className="invisible ">
+                    <p>0</p>
+                </div>
+                <div className="w-4/5 text-center ">
                     <h1 className="text-lg tracking-widest text-gradient">
                         LUXELEND
                     </h1>
                 </div>
-                <button className="w-1/12" onClick={() => {}}>
+                <button onClick={() => {}}>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
