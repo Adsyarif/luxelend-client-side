@@ -1,0 +1,21 @@
+{
+  "title": "Brand",
+  "contents": [
+    {
+      "imageUrl": "src/assets/image/kate-spade.webp",
+      "description": "Kate Spade"
+    },
+    {
+      "imageUrl": "src/assets/image/michael-kors.webp",
+      "description": "Michael Kors"
+    },
+    {
+      "imageUrl": "src/assets/image/ted-baker.webp",
+      "description": "Ted Baker"
+    },
+    {
+      "imageUrl": "src/assets/image/reiss.webp",
+      "description": "Reiss"
+    }
+  ]
+}
