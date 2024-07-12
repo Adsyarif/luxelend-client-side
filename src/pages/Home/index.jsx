@@ -1,41 +1,50 @@
-import { Header } from "@/components";
-import { WelcomeBanner } from "@/components/Home";
-import { Button } from "@/components";
-import { HomeBanner } from "@/components/Home";
-import { BrandLineup } from "@/components/Home";
-import { FeaturesCard } from "@/components/Home";
-import { NavButton } from "@/components";
-import { useNavigate } from "react-router-dom";
+import { Header, Button, NavbarButton } from "@/components/common";
+import {
+  WelcomeBanner,
+  HomeBanner,
+  BrandLineup,
+  FeaturesCard,
+} from "@/components/Home";
+
+import brands from "@/data/brandList.json";
+import servicesData from "@/data/servicesList.json";
+
+import { Link } from "react-router-dom";
 
 export function HomePages() {
-  const navigate = useNavigate();
+  const selectGender = (gender) => {
+    const { setUser } = useContext(AppContext);
+
+    return setUser((prev) => ({
+      ...prev,
+      gender: gender,
+    }));
+  };
 
   return (
-    <div>
+    <div className="max-w-screen-sm mx-auto md:my-20 md:max-w-2xl">
       <Header />
       <WelcomeBanner />
       <div className=" flex flex-row justify-center align-middle font-semibold gap-10 my-4">
-        <Button
-          onClick={() => {
-            navigate("/women");
-          }}
-          className="bg-rose-50 w-28"
-        >
-          <p>Women</p>
-        </Button>
-        <Button
-          onClick={() => {
-            navigate("/men");
-          }}
-          className="bg-rose-50 w-28"
-        >
-          <p>Men</p>
-        </Button>
+        <Link to={"/women"}>
+          <Button
+            text={"Women"}
+            type={"home"}
+            onClick={() => selectGender("women")}
+          />
+        </Link>
+        <Link to={"/men"}>
+          <Button
+            text={"Men"}
+            type={"home"}
+            onClick={() => selectGender("men")}
+          />
+        </Link>
       </div>
       <HomeBanner />
-      <BrandLineup />
-      <FeaturesCard />
-      <NavButton />
+      <BrandLineup items={brands} />
+      <FeaturesCard items={servicesData} />
+      <NavbarButton />
     </div>
   );
 }

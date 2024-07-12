@@ -1,5 +1,5 @@
 import { Banner } from "@/components/common";
-import { ListCard } from "@/components";
+import { ListCard } from "@/components/categories";
 
 const CategoryCard = ({ items, gender }) => {
   return (

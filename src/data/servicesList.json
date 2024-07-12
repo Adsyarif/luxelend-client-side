@@ -1,0 +1,20 @@
+{
+  "title": "Rent, Return, Repeat",
+  "contents": [
+    {
+      "name": "service-1",
+      "imageUrl": "src/assets/image/scroll.webp",
+      "description": "Pieces arrive clean and in perfect condition"
+    },
+    {
+      "name": "service-2",
+      "imageUrl": "src/assets/image/package.webp",
+      "description": "Choose one-time rental rent base on your need"
+    },
+    {
+      "name": "service-3",
+      "imageUrl": "src/assets/image/bag.webp",
+      "description": "100+ Premium styles in various sizes"
+    }
+  ]
+}
