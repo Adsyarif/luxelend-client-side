@@ -11,6 +11,9 @@ import servicesData from "@/data/servicesList.json";
 
 import { Link } from "react-router-dom";
 
+import { useContext } from "react";
+import { AppContext } from "@/contexts/Context";
+
 export function HomePages() {
   const selectGender = (gender) => {
     const { setUser } = useContext(AppContext);
