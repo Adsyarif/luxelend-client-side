@@ -48,7 +48,7 @@ export function Carousel({ gender, product_id }) {
   return (
     <div className="relative w-[45vh] overflow-hidden rounded-md">
       <div
-        className="flex  snap-x snap-mandatory overflow-x-auto w-[45vh] no-scrollbar"
+        className="flex snap-x snap-mandatory overflow-x-auto w-[45vh] no-scrollbar"
         onScroll={handleScroll}
       >
         {imageUrls.map((imageUrl, index) => (
