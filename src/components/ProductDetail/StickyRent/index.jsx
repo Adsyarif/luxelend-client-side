@@ -2,24 +2,28 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { Card } from "@/components/common";
-import { Button } from "@/components/common";
 
 export function StickyRent() {
   const whatsappLink =
     "https://wa.me/08231231412?text=I want to rent this product";
   const { gender, product_id } = useParams();
-  const [productRentPrice, setProductRentPrice] = useState(null);
+  const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const currency = new Intl.NumberFormat('en-EN', {
+    style: 'currency',
+    currency: 'IDR'
+  });
+
   useEffect(() => {
-    const fetchProductRentPrice = async () => {
+    const fetchProduct = async () => {
       try {
         const response = await axios.get(
-          `http://127.0.0.1:5000/${gender}/product/${product_id}`
+          `https://luxelend-production.up.railway.app/product/${product_id}`
         );
-        setProductRentPrice(response.data);
-        console.log(`Response for ${gender} and ${product_id}:`, response.data);
+        setProduct(response.data.data);
+        
       } catch (error) {
         console.error("Error fetching product rent price", error);
         setError("Error fetching product rent price");
@@ -28,8 +32,8 @@ export function StickyRent() {
       }
     };
 
-    fetchProductRentPrice();
-  }, [gender, product_id]);
+    fetchProduct();
+  }, [product_id]);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -39,20 +43,37 @@ export function StickyRent() {
     return <div>{error}</div>;
   }
 
-  if (!productRentPrice) {
+  if (!product) {
     return <div>No rent price found</div>;
   }
+  
+  const stock = parseInt(product.stock);
+  const isOutOfStock = stock === 0;
 
   return (
-    <div className="flex justify-center bottom-0 sticky font-medium text-lg text-white">
-      <Card className="flex w-screen justify-around text-center items-center bg-[#011224] p-5">
-        <p className="font-bold">Rent for IDR {productRentPrice.rent_price}</p>
-        <span></span>
-        <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
-          <Button className="bg-[#F4F4F4] text-[#191825] border-none">
-            <p>Rent Now</p>
-          </Button>
-        </a>
+    <div className="flex items-center bottom-0 sticky font-medium text-lg text-white">
+      <Card className=" rounded-md flex w-screen justify-between text-center items-center bg-[#011224] p-3">
+        <p className=" font-bold md:ml-6">Rent for {currency.format(product.rented_price)}</p>
+        <div className="flex  md:mr-6 ">
+            {isOutOfStock ? (
+                <button
+                className="  text-center px-3 py-1 rounded-md text-white font-semibold bg-gray cursor-not-allowed"
+                disabled
+                >
+                Out of Stock
+                </button>
+            ) : (
+                <a
+                className=" text-center px-3 py-1 rounded-md text-white font-semibold bg-gradient-to-r from-lightBrown from-10% to-darkBrown hover:text-black"
+                onClick={() => handleRentNowClick(product)}
+                href={`${whatsappLink} ${product.name}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                >
+                Rent Now
+                </a>
+            )}
+        </div>
       </Card>
     </div>
   );

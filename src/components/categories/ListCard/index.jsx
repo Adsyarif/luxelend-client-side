@@ -1,31 +1,22 @@
-// import { Button } from "../../Components";
 import { useNavigate } from "react-router-dom";
-import { AppContext } from "../../../contexts/Context";
-import { useContext } from "react";
 
 const ListCard = ({ items, gender }) => {
-  const { user, setUser } = useContext(AppContext);
   const navigate = useNavigate();
 
-  const selectCategory = (category, gender, user) => {
-    setUser({
-      gender: gender,
-      category: category,
-    });
-
-    const path = ["/", gender.toLowerCase(), category.toLowerCase()];
-    navigate(path.join("/"));
+  const selectCategory = (categoryName) => {
+    const path = `/${categoryName.toLowerCase()}/${gender === "2" ? "women" : "men"}`;
+    navigate(path);
   };
 
   return (
-    <div className="grid grid-cols-2 w-80 mx-auto">
-      {items.map((item, index) => (
+    <div className="capitalize grid grid-cols-2 md:w-96 mx-auto ">
+      {items.map((item, name) => (
         <button
-          key={index}
-          onClick={() => selectCategory(item, gender, user)}
-          className="text-start text-sm p-2 hover:bg-lightBrown w-40"
+          key={item.name}
+          onClick={() => selectCategory(item.name)}
+          className="ml-5 capitalize text-start md:text-base p-2 hover:bg-lightBrown w-full"
         >
-          {item}
+          {item.name}
         </button>
       ))}
     </div>

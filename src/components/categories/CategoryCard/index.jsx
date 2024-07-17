@@ -7,7 +7,7 @@ const CategoryCard = ({ items, gender }) => {
       <Banner gender={gender} />
       <div className="py-2">
         <div className="py-2 flex justify-center">
-          <h2 className="font-bold">{gender}</h2>
+        <h2 className="font-bold text-lg">{gender === "1" ? "Men's Categories" : "Women's Categories"}</h2>
         </div>
         <ListCard items={items} gender={gender} />
       </div>

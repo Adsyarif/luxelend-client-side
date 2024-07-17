@@ -22,7 +22,7 @@ export function ProductDetail() {
     const fetchDetailProductData = async () => {
       try {
         const response = await axios.get(
-          `http://127.0.0.1:5000/product/${product_id}`
+          `https://luxelend-production.up.railway.app/product/${product_id}`
         );
         setProductDetail(response.data.data);
         console.log(`Response for ${gender} and ${product_id}:`, response.data);
@@ -51,16 +51,16 @@ export function ProductDetail() {
   }
 
   return (
-    <div className="bg-white max-w-screen-sm mx-auto md:max-w-2xl border-none ">
+    <div className=" bg-white max-w-screen-sm mx-auto md:max-w-2xl border-none ">
       <Header />
-      <div className="flex mt-4">
+      <div className="flex justify-center mt-4">
         <div className="ml-2 mr-2">
           <Button>Back</Button>
         </div>
-        {/* <Carousel gender={gender} product_id={product_id} /> */}
+        <Carousel product_id={product_id} />
       </div>
-      <div className="flex justify-around items-center">
-        <div className="mr-2 mt-3">
+      <div className="m-3 capitalize flex justify-between items-center">
+        <div className=" mt-3">
           <h1 className="font-bold text-2xl">{productDetail.product_properties.find(prop => prop.property && prop.property.property_category_id === 3)?.property.value}</h1>
           <p>{productDetail.name}</p>
           <p>Retail value {currency.format(productDetail.retail_price)}</p>
@@ -69,26 +69,32 @@ export function ProductDetail() {
           <ShareButton />
         </div>
       </div>
-      <div className="ml-7 my-3">
+      <div className="ml-3 mr-3 my-3 capitalize">
         <h1 className="font-bold text-xl">Product Details</h1>
-        <ul className="list-disc ml-5 ">
+        <ul className="list-disc ml-5 mb-5">
           <li>
-            Style: {productDetail.product_properties.find(prop => prop.property && prop.property.property_category_id === 4)?.property.value}
+            Style: {productDetail.product_properties.find(prop => prop.property && prop.property.property_category_id === 6)?.property.value}
           </li>
           <li>
             Material: {productDetail.product_properties.find(prop => prop.property && prop.property.property_category_id === 5)?.property.value}
           </li>
-          <li>Size: {productDetail.product_properties.find(prop => prop.property && prop.property.property_category_id === 1)?.property.value}</li>
+            Size: {productDetail.product_properties
+                    .filter(prop => prop.property && prop.property.property_category_id === 1)
+                    .map(prop => prop.property.value)
+                    .join(', ')
+                }
           <li>Fit note: {productDetail.fit_note}</li>
           <li>
-            Color: {productDetail.product_properties.find(prop => prop.property && prop.property.property_category_id === 2)?.property.value}
+            Color: {productDetail.product_properties
+                    .filter(prop => prop.property && prop.property.property_category_id === 2)
+                    .map(prop => prop.property.value)
+                    .join(', ')
+                }
           </li>
         </ul>
+        <TableSizeGuide />
       </div>
-      {/* tablesizeuide is hardcode */}
-      <TableSizeGuide />
-
-      {/* <StickyRent /> */}
+      <StickyRent />
     </div>
   );
 }

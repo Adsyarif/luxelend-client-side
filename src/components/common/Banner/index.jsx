@@ -22,7 +22,7 @@ const Banner = ({ gender }) => {
   if (user.category) {
     bannerClass.push("bg-[url('categoryHeroBg.webp')]");
   } else {
-    gender === "Women"
+    gender === "2"
       ? bannerClass.push("bg-[url('womenHeroBg.webp')]")
       : bannerClass.push("bg-[url('menHeroBg.webp')]");
   }

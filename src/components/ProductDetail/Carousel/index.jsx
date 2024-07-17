@@ -11,9 +11,9 @@ export function Carousel({ gender, product_id }) {
     const fetchImageURL = async () => {
       try {
         const response = await axios.get(
-          `http://127.0.0.1:5000/product/${product_id}`
+          `https://luxelend-production.up.railway.app/product/${product_id}`
         );
-        setImageUrls(response.data.image_url);
+        setImageUrls(response.data.data.product_images);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching images:", error);
@@ -47,15 +47,15 @@ export function Carousel({ gender, product_id }) {
   return (
     <div className="relative w-[45vh] overflow-hidden rounded-md">
       <div
-        className="flex snap-x snap-mandatory overflow-x-auto w-[45vh] no-scrollbar"
+        className="flex  snap-x snap-mandatory overflow-x-auto w-[45vh] no-scrollbar"
         onScroll={handleScroll}
       >
         {imageUrls.map((imageUrl, index) => (
           <div key={index} className="flex-shrink-0 w-[45vh] snap-center mx-2">
             <img
-              className="w-[45vh] h-full object-cover object-center"
-              src={imageUrl}
-              alt={`Slide ${index}`}
+                className="justify-center w-[45vh] h-full object-cover object-center"
+                src={imageUrls[activeIndex].value}
+                alt={`Slide ${activeIndex}`}
             />
           </div>
         ))}
@@ -63,13 +63,14 @@ export function Carousel({ gender, product_id }) {
       <div className=" flex justify-center m-2">
         {imageUrls.map((_, index) => (
           <div
-            key={index}
-            className={`w-2 h-2 rounded-full mx-1 cursor-pointer ${
-              index === activeIndex ? "bg-black" : "bg-aqua"
-            }`}
-            onClick={() => setActiveIndex(index)}
-            style={{ minWidth: "8px", minHeight: "8px", padding: "4px" }}
-          ></div>
+          key={index}
+          className={`w-2 h-2 rounded-full mx-1 cursor-pointer ${
+            index === activeIndex ? "bg-black" : "bg-aqua"
+          }`}
+          onClick={() => setActiveIndex(index)}
+          style={{ minWidth: "8px", minHeight: "8px", padding: "4px" }}
+        ></div>
+        
         ))}
       </div>
     </div>

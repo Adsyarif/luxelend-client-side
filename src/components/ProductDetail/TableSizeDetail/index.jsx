@@ -39,8 +39,14 @@ const rows = [
 
 export default function TableSizeGuide() {
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 380 }} aria-label="size guide">
+    <TableContainer component={Paper} sx={{ 
+        maxWidth: '100%', 
+        overflowX: 'auto',
+        '@media (min-width: 600px)': {
+          minWidth: 380,
+        },
+      }}>
+      <Table  aria-label="size guide">
         <TableHead>
           <TableRow>
             <StyledTableCell sx={{ fontSize: "0.75rem" }}>
