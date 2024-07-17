@@ -1,3 +1,5 @@
+import { green } from "@mui/material/colors";
+
 const plugin = require("tailwindcss/plugin");
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -14,6 +16,8 @@ export default {
       cream: "#F3E6DD",
       transparant: "rgba(255,255,255,0.5)",
       transparantBlack: "rgba(0,0,0,0.5)",
+      green:"#7FFF00",
+      gray:"#696969"
     },
   },
   plugins: [

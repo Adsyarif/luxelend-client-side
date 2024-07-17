@@ -8,28 +8,16 @@ import {
 
 import brands from "@/data/brandList.json";
 import servicesData from "@/data/servicesList.json";
-
 import { Link } from "react-router-dom";
-import { useContext } from "react";
-import { AppContext } from "@/contexts/Context";
-
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 export function HomePages() {
-  // const selectGender = (gender) => {
-  //   const { setUser } = useContext(AppContext);
-
-  //   return setUser((prev) => ({
-  //     ...prev,
-  //     gender: gender,
-  //   }));
-  // };
   const [genders, setGenders] = useState([]);
   useEffect(() => {
     const fetchGenders = async () => {
       try {
-        const response = await axios.get('http://127.0.0.1:5000/gender');
+        const response = await axios.get('https://luxelend-production.up.railway.app/gender');
         setGenders(response.data);
       } catch (error) {
         console.error("There was an error fetching the genders!", error);

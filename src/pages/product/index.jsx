@@ -2,9 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 
-import { ProductList } from '@/components/Products';
-
-import { NavbarButton, Header, Button } from "@/components/common";
+import { NavbarButton, Header } from "@/components/common";
 import Filter from "@/components/Products/filter";
 
 export function ProductPage() {
@@ -21,6 +19,7 @@ export function ProductPage() {
     styleFilter: '',
     availableNow: false,
     sortOrder: 'newest',
+    categoryFilter: '',
   });
 
   const currency = new Intl.NumberFormat('en-EN', {
@@ -35,7 +34,6 @@ export function ProductPage() {
       highToLow: (a, b) => b.rented_price - a.rented_price,
       lowToHigh: (a, b) => a.rented_price - b.rented_price,
     };
-    
     return products.slice().sort(sortMap[sortOrder] || ((a, b) => a - b));
   };
 
@@ -50,16 +48,21 @@ export function ProductPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://127.0.0.1:5000/product');
+        const response = await axios.get('https://luxelend-production.up.railway.app/product');
   
         if (Array.isArray(response.data.products) && response.data.products.length > 0) {
           const allProducts = response.data.products;
-          console.log(allProducts)
           setTotalProductCount(allProducts.length);
   
           let filteredProducts = allProducts.filter(product => {
             return product.gender_category.gender.name.toLowerCase() === gender;
           });
+
+          if (category && category !== 'all') {
+            filteredProducts = filteredProducts.filter(product => {
+              return product.category.name.toLowerCase() === category.toLowerCase();
+            });
+          }
 
           if (filters.sizeFilter) {
             filteredProducts = filterProductsByProperty(filteredProducts, 1, filters.sizeFilter);
@@ -72,11 +75,16 @@ export function ProductPage() {
           }
           if (filters.styleFilter) {
             filteredProducts = filterProductsByProperty(filteredProducts, 4, filters.styleFilter);
+            if (gender === 'men') {
+              filteredProducts = filteredProducts.concat(filterProductsByProperty(allProducts, 6, filters.styleFilter));
+            }
           }
           if (filters.materialFilter) {
             filteredProducts = filterProductsByProperty(filteredProducts, 5, filters.materialFilter);
           }
-
+          if (filters.availableNow) {
+            filteredProducts = filteredProducts.filter(product => parseInt(product.stock) > 0);
+          }
           filteredProducts = sortProducts(filteredProducts, filters.sortOrder);
   
           setProductData(filteredProducts);
@@ -95,19 +103,38 @@ export function ProductPage() {
   }, [gender, filters, category]);
 
   const handleRentNowClick = (product) => {
-    
     console.log(`Rent Now clicked for product ${product.id}`);
   };
+
+  const renderBannerCategory = gender && category;
 
   return (
     <div className="max-w-screen-sm mx-auto md:max-w-2xl border-none ">
       <Header />
-      <div className="m-0 border-none  flex  h-32 flex-col text-center justify-center gap-2 text-white bg-center bg-no-repeat bg-cover bg-[url('/src/assets/image/genderHeroBg.webp')]">
-        <p className="text-sm">Category</p>
-        <h2 className='text-center'>{gender === 'women' ? 'Women Products' : 'Men Products'}</h2>
-      </div>
+      {!(gender && category) && (
+        <div className={`m-0 border-none flex h-32 flex-col text-center justify-center gap-2 text-white bg-center bg-no-repeat bg-cover ${gender === 'women' ? 'bg-[url("/src/assets/image/womenHeroBg.webp")]' : 'bg-[url("/src/assets/image/menHeroBg.webp")]'}`}>
+          <p className="text-sm">Category</p>
+          <h2 className='text-center font-bold'>{gender === 'women' ? 'Women Products' : 'Men Products'}</h2>
+        </div>
+      )}
+
+      {renderBannerCategory && (
+        <div className="capitalize relative m-0 border-none flex h-32 flex-col text-center justify-center gap-2 text-white bg-[url('/src/assets/image/categoryHeroBg.webp')]"
+        style={{
+          backgroundImage: `url('/src/assets/image/${gender === 'men' ? 'categoryMen' : 'categoryHero'}Bg.webp')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          color: 'white', 
+        }}
+        >
+          <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50"></div>
+          <p className="text-sm z-10 relative">{gender}</p>
+          <h2 className='font-bold text-center z-10 relative'>{category}</h2>
+        </div>
+      )}
+      
       <div className="p-4 border-none flex justify-between">
-        <Filter setFilters={setFilters} category={gender} />
+      <Filter setFilters={setFilters} category={category} gender={gender} />
         <div className="flex items-center p-5">
           {loading && <p>Loading...</p>}
           {!loading && !error && <p className='ml-auto'>{productData.length} Result</p>}
@@ -140,7 +167,7 @@ export function ProductPage() {
               <div className="flex justify-center pt-5">
                 {isOutOfStock ? (
                   <button
-                    className="w-4/6 text-center px-3 py-1 rounded-md text-white font-semibold bg-black cursor-not-allowed"
+                    className="w-4/6 text-center px-3 py-1 rounded-md text-white font-semibold bg-gray cursor-not-allowed"
                     disabled
                   >
                     Out of Stock
@@ -162,9 +189,6 @@ export function ProductPage() {
           );
         })}
       </div>
-
-      {/* <ProductList/> */}
-      
       <NavbarButton />
     </div>
   );
