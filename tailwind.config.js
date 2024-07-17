@@ -11,6 +11,8 @@ export default {
       aqua: "#A0D2FF",
       darkBlue: "#20386B",
       darkBrown: "#EFB01F",
+      gray: "#e5e5e5",
+      lightGray: "f2f2f2",
     },
   },
   plugins: [

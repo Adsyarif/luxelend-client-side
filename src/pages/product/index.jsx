@@ -1,4 +1,4 @@
-import { ProductList, FilterButton } from "@/components/Products";
+import { FilterButton, ProductCard } from "@/components/Products";
 import { BottomNavbar, Header } from "@/components/common";
 
 export function ProductPage() {
@@ -9,11 +9,8 @@ export function ProductPage() {
         <p className="text-sm">Category</p>
         <p className="font-bold text-2xl">Women</p>
       </div>
-      <div className="p-4 border-none flex justify-between">
-        <FilterButton />
-        <p className="italic">180 result</p>
-      </div>
-      <ProductList />
+      <FilterButton />
+      <ProductCard />
       <BottomNavbar />
     </div>
   );
