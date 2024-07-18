@@ -4,6 +4,34 @@
 
 Urban’s premier luxury fashion rental platform
 
+## Table of Contents
+
+1. [LUXELEND](#luxelend)
+2. [Problem Statement](#problem-statement)
+3. [Solution](#solution)
+4. [Deployment](#deployment)
+5. [Tech Stack](#tech-stack)
+   - [Languages](#languages)
+   - [Libraries and Dependencies](#libraries-and-dependencies)
+6. [Pages](#pages)
+   - [Homepage](#homepage-)
+   - [Category Page](#category-page-)
+   - [Results Page](#results-page-based-on-gender-and-categories)
+   - [Product Detail Page](#product-detail-page--product_id-)
+7. [Feature](#feature)
+   - [Filtering Option](#filtering-option)
+   - [Sorting Functionality](#sorting-functionality)
+   - [WhatsApp Integration for Rental](#whatsapp-integration-for-rental)
+8. [Prerequisites](#prerequisites)
+9. [Run in Local](#run-in-local)
+   - [Clone or Pulling from Repo](#clone-or-pulling-from-repo)
+   - [Optional Checkout](#optional)
+   - [Install Dependency](#instal-dependency)
+   - [Run](#run)
+   - [Test Build/Deployment](#test-builddeployment)
+10. [React + Vite](#react--vite)
+
+
 ## Problem Statement
 
 - Overwhelming selection process due to unorganized product catalog
