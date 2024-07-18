@@ -88,6 +88,7 @@ git pull/clone https://github.com/Adsyarif/luxelend-client-side.git
 ### Optional
 
 Checkout to determine branch
+-. git checkout "nama branch"
 
 ### Instal Dependency
 
