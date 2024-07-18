@@ -8,10 +8,9 @@ const Header = () => {
           <p>0</p>
         </div>
         <div className="w-4/5 text-center ">
-        <Link to={"/"}>
-        <h1 className="text-lg tracking-widest text-gradient">LUXELEND</h1>
-        </Link>
-          
+          <Link to={"/"}>
+            <h1 className="text-lg tracking-widest text-gradient">LUXELEND</h1>
+          </Link>
         </div>
         <button onClick={() => {}}>
           <svg

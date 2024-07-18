@@ -141,16 +141,11 @@ const Filter = ({ setFilters, category }) => {
         <div className="border-none">
           <h2 className="mb-4 text-xl font-bold text-center">Filter + Sort</h2>
           <h3 className="font-bold">Sort by</h3>
-          <div className="flex font-semibold text-xs">
+          <div className="flex font-semibold text-xs gap-1">
             <button
               className={`rounded-md px-3 py-1 border border-slate-100 ${activeSortOrder === 'newest' ? 'bg-[#EFB01F] text-white' : 'bg-[#F9E29A]'}`}
               onClick={() => { setSortOrder('newest'); setActiveSortOrder('newest'); }}>
               Newest
-            </button>
-            <button
-              className={`rounded-md px-3 py-1 border border-slate-100 ${activeSortOrder === 'popular' ? 'bg-[#EFB01F] text-white' : 'bg-[#F9E29A]'}`}
-              onClick={() => { setSortOrder('popular'); setActiveSortOrder('popular'); }}>
-              Popular
             </button>
             <button
               className={`rounded-md px-3 py-1 border border-slate-100 ${activeSortOrder === 'highToLow' ? 'bg-[#EFB01F] text-white' : 'bg-[#F9E29A]'}`}

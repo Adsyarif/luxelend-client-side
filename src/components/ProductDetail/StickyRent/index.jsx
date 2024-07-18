@@ -57,22 +57,21 @@ export function StickyRent() {
         <p className=" font-bold md:ml-6">Rent for {currency.format(product.rented_price)}</p>
         <div className="flex  md:mr-6 ">
             {isOutOfStock ? (
-                <button
+              <button
                 className="  text-center px-3 py-1 rounded-md text-white font-semibold bg-gray cursor-not-allowed"
                 disabled
-                >
+              >
                 Out of Stock
-                </button>
+              </button>
             ) : (
-                <a
+              <a
                 className=" text-center px-3 py-1 rounded-md text-white font-semibold bg-gradient-to-r from-lightBrown from-10% to-darkBrown hover:text-black"
-                onClick={() => handleRentNowClick(product)}
                 href={`${whatsappLink} ${product.name}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                >
+              >
                 Rent Now
-                </a>
+              </a>
             )}
         </div>
       </Card>

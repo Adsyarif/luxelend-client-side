@@ -4,6 +4,7 @@ import axios from 'axios';
 import config from "@/config";
 import { NavbarButton, Header } from "@/components/common";
 import Filter from "@/components/Products/filter";
+import loadingGif from "@/assets/icons/loading.gif"
 
 export function ProductPage() {
   const { gender, category } = useParams();
@@ -102,9 +103,6 @@ export function ProductPage() {
     fetchData();
   }, [gender, filters, category]);
 
-  const handleRentNowClick = (product) => {
-    console.log(`Rent Now clicked for product ${product.id}`);
-  };
 
   const renderBannerCategory = gender && category;
 
@@ -128,8 +126,8 @@ export function ProductPage() {
         }}
         >
           <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50"></div>
-          <p className="text-sm z-10 relative">{gender}</p>
-          <h2 className='font-bold text-center z-10 relative'>{category}</h2>
+          <p className="text-sm z-1 relative">{gender}</p>
+          <h2 className='font-bold text-center z-1 relative'>{category}</h2>
         </div>
       )}
       
@@ -143,7 +141,7 @@ export function ProductPage() {
       
       {loading && (
         <div className="flex flex-col justify-center items-center ">
-          <img src="src/assets/icons/loading.gif" alt="Loading..." className="w-16 h-16" />
+          <img src={loadingGif} alt="Loading..." className="w-16 h-16" />
           <p>Loading</p>
         </div>
       )}
@@ -183,7 +181,6 @@ export function ProductPage() {
                 ) : (
                   <a
                     className="w-4/6 text-center px-3 py-1 rounded-md text-white font-semibold bg-gradient-to-r from-lightBrown from-10% to-darkBrown hover:text-black"
-                    onClick={() => handleRentNowClick(product)}
                     href={`https://wa.me/08231231412?text=I want to rent this product ${product.name}`}
                     target="_blank"
                     rel="noopener noreferrer"
