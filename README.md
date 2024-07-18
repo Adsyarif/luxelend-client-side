@@ -85,20 +85,21 @@ Urban’s premier luxury fashion rental platform
 
 ## Feature
 
-### Filtering Option
-  -. Gender: Filter products based on gender (e.g., Men, Women).
-  -. Color: Select products based on available colors.
-  -. Size: Filter by available sizes to find the perfect fit.
-  -. Material: Choose products based on the material they are made of.
-  -. Brand: Filter by brand to find items from preferred designers.
-  -. Availability: Check product availability to ensure items are in stock.
+### Filtering Options
+   - **Gender**: Filter products based on gender (e.g., Men, Women).
+   - **Color**: Select products based on available colors.
+   - **Size**: Filter by available sizes to find the perfect fit.
+   - **Material**: Choose products based on the material they are made of.
+   - **Brand**: Filter by brand to find items from preferred designers.
+   - **Availability**: Check product availability to ensure items are in stock.
+
   
 ### Sorting Functionality
-  -. Newest: Sort products by the newest arrivals to stay updated with the latest trends.
-  -. Price: Sort products by price (e.g., low to high, high to low).
+  -  **Newest**: Sort products by the newest arrivals to stay updated with the latest trends.
+  -  **Price** : Sort products by price (e.g., low to high, high to low).
   
 ### WhatsApp integration for rental
-  -. Rent through WhatsApp: Use the **click-to-chat** API to rent products directly through WhatsApp for a seamless rental experience.
+  - ** Rent through WhatsApp**: Use the **click-to-chat** API to rent products directly through WhatsApp for a seamless rental experience.
   
 ## Prerequisities
 
@@ -111,12 +112,11 @@ Urban’s premier luxury fashion rental platform
 
 ### Clone or pulling from repo
 
-git pull/clone https://github.com/Adsyarif/luxelend-client-side.git
+(`git pull/clone https://github.com/Adsyarif/luxelend-client-side.git`)
 
 ### Optional
 
-Checkout to determine branch
--. git checkout "nama branch"
+Checkout to determine branch (`git checkout -b feature`)
 
 ### Instal Dependency
 
