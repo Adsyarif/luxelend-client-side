@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
-
+import config from "@/config";
 import { NavbarButton, Header } from "@/components/common";
 import Filter from "@/components/Products/filter";
 
@@ -48,7 +48,7 @@ export function ProductPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://luxelend-production.up.railway.app/product');
+        const response = await axios.get(`${config.BASE_URL}/product`);
   
         if (Array.isArray(response.data.products) && response.data.products.length > 0) {
           const allProducts = response.data.products;
@@ -136,13 +136,21 @@ export function ProductPage() {
       <div className="p-4 border-none flex justify-between">
       <Filter setFilters={setFilters} category={category} gender={gender} />
         <div className="flex items-center p-5">
-          {loading && <p>Loading...</p>}
           {!loading && !error && <p className='ml-auto'>{productData.length} Result</p>}
         </div>
       </div>
       {!loading && !error && productData.length === 0 && <p className='ml-auto'>No products match the selected filters.</p>}
-    
+      
+      {loading && (
+        <div className="flex flex-col justify-center items-center ">
+          <img src="src/assets/icons/loading.gif" alt="Loading..." className="w-16 h-16" />
+          <p>Loading</p>
+        </div>
+      )}
+
       <div className="p-5 border-none grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-3">
+        
+
         {productData.map((product) => {
             const brandProperty = product.product_properties.find(
               (prop) => prop.property && prop.property.property_category_id === 3

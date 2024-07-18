@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import { useParams } from 'react-router-dom';
+import config from "@/config";
 
 Modal.setAppElement('#root');
 
@@ -31,16 +32,15 @@ const Filter = ({ setFilters, category }) => {
   const [activeSortOrder, setActiveSortOrder] = useState('newest');
   const [propertyCategories, setPropertyCategories] = useState([]);
   const [properties, setProperties] = useState([]);
-
   const { gender } = useParams();
 
   useEffect(() => {
-    fetch('https://luxelend-production.up.railway.app/property_category')
+    fetch(`${config.BASE_URL}/property_category`)
       .then(response => response.json())
       .then(data => setPropertyCategories(data.property_category))
       .catch(error => console.error('Error fetching property categories:', error));
 
-    fetch('https://luxelend-production.up.railway.app/property')
+    fetch(`${config.BASE_URL}/property`)
       .then(response => response.json())
       .then(data => setProperties(data.propertiy))
       .catch(error => console.error('Error fetching properties:', error));

@@ -5,7 +5,7 @@ import {
   BrandLineup,
   FeaturesCard,
 } from "@/components/Home";
-
+import config from "@/config";
 import brands from "@/data/brandList.json";
 import servicesData from "@/data/servicesList.json";
 import { Link } from "react-router-dom";
@@ -17,7 +17,7 @@ export function HomePages() {
   useEffect(() => {
     const fetchGenders = async () => {
       try {
-        const response = await axios.get('https://luxelend-production.up.railway.app/gender');
+        const response = await axios.get(`${config.BASE_URL}/gender`);
         setGenders(response.data);
       } catch (error) {
         console.error("There was an error fetching the genders!", error);

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { Card } from "@/components/common";
+import config from "@/config";
 
 export function StickyRent() {
   const whatsappLink =
@@ -20,7 +21,7 @@ export function StickyRent() {
     const fetchProduct = async () => {
       try {
         const response = await axios.get(
-          `https://luxelend-production.up.railway.app/product/${product_id}`
+          `${config.BASE_URL}/product/${product_id}`
         );
         setProduct(response.data.data);
         
