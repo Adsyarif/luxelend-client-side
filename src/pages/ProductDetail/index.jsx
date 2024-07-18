@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { Header, Button } from "@/components/common";
+import { Header, Button, BackButton } from "@/components/common";
 import TableSizeGuide from "@/components/ProductDetail/TableSizeDetail";
 import { StickyRent } from "@/components/ProductDetail/StickyRent";
 import { Carousel } from "@/components/ProductDetail/Carousel";
@@ -26,7 +26,6 @@ export function ProductDetail() {
           `${config.BASE_URL}/product/${product_id}`
         );
         setProductDetail(response.data.data);
-        console.log(`Response for ${gender} and ${product_id}:`, response.data);
       } catch (error) {
         console.error("Error fetching product details data", error);
         setError("Error fetching product details");
@@ -61,10 +60,8 @@ export function ProductDetail() {
   return (
     <div className="bg-white max-w-screen-sm mx-auto md:max-w-2xl border-none">
       <Header />
+      <BackButton isText={false}/>
       <div className="flex justify-center mt-4">
-        <div className="ml-2 mr-2">
-          <Button>Back</Button>
-        </div>
         <Carousel product_id={product_id} />
       </div>
       <div className="m-3 capitalize flex justify-between items-center">
