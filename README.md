@@ -39,18 +39,18 @@ Urban’s premier luxury fashion rental platform
 
 - Homepage = "/"
   ![Home Page](./src/assets/doc/homePage.png)
-  Usage: Explore featured items and navigate through different sections of the platform such as banner, product links and search feature (to be implement)
+  **Usage**: Explore featured items and navigate through different sections of the platform such as banner, product links and search feature (to be implement)
 
 - Category Page = "/category"
   ![Category Page](./src/assets/doc/categoryPage.png)
-  Usage: Browse items based on specific categories divided based on the gender and user can choose what kind of categories they looking for.
+  **Usage**: Browse items based on specific categories divided based on the gender and user can choose what kind of categories they looking for.
 
 - Results page (Based on gender and categories)
 
   - "/:gender" , example : "/men" or "/women"
   - "/:category/:gender", example : "tops/women"
     ![Results Page](./src/assets/doc/resultsPage.png)
-  Usage: After choosing which gender are they, user can manually filter spesific things for instance: Filter base on size, color and etc. (Read feature section)
+  **Usage**: After choosing which gender are they, user can manually filter spesific things for instance: Filter base on size, color and etc. (Read feature section)
 
 - Product detail page : "/productDetail/:product_id" , example : "productDetail/35"
   ![Product Detail Page](./src/assets/doc/productDetailPage.png)
@@ -75,11 +75,19 @@ Urban’s premier luxury fashion rental platform
 ## Prerequisities
 
 ### **Node.js and npm/yarn installed on your machine **
-  Note: It is crucial to have Node.js and npm/yarn installed on your machine to run the project locally. If you don't have them installed, please follow the instructions below:
+## Note: It is crucial to have Node.js and npm/yarn installed on your machine to run the project locally. If you don't have them installed, please follow the instructions below:
     -.Install Node.js
     -.Install Yarn (recommended) or use npm
 
 ## Run in local
+
+### Clone or pulling from repo
+
+git pull/clone https://github.com/Adsyarif/luxelend-client-side.git
+
+### Optional
+
+Checkout to determine branch
 
 ### Instal Dependency
 
