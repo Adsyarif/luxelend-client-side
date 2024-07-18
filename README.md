@@ -39,18 +39,45 @@ Urban’s premier luxury fashion rental platform
 
 - Homepage = "/"
   ![Home Page](./src/assets/doc/homePage.png)
+  Usage: Explore featured items and navigate through different sections of the platform such as banner, product links and search feature (to be implement)
 
 - Category Page = "/category"
   ![Category Page](./src/assets/doc/categoryPage.png)
+  Usage: Browse items based on specific categories divided based on the gender and user can choose what kind of categories they looking for.
 
 - Results page (Based on gender and categories)
 
   - "/:gender" , example : "/men" or "/women"
   - "/:category/:gender", example : "tops/women"
     ![Results Page](./src/assets/doc/resultsPage.png)
+  Usage: After choosing which gender are they, user can manually filter spesific things for instance: Filter base on size, color and etc. (Read feature section)
 
 - Product detail page : "/productDetail/:product_id" , example : "productDetail/35"
   ![Product Detail Page](./src/assets/doc/productDetailPage.png)
+
+## Feature
+
+### Filtering Option
+  -. Gender: Filter products based on gender (e.g., Men, Women).
+  -. Color: Select products based on available colors.
+  -. Size: Filter by available sizes to find the perfect fit.
+  -. Material: Choose products based on the material they are made of.
+  -. Brand: Filter by brand to find items from preferred designers.
+  -. Availability: Check product availability to ensure items are in stock.
+  
+### Sorting Functionality
+  -. Newest: Sort products by the newest arrivals to stay updated with the latest trends.
+  -. Price: Sort products by price (e.g., low to high, high to low).
+  
+### WhatsApp integration for rental
+  -. Rent through WhatsApp: Use the **click-to-chat** API to rent products directly through WhatsApp for a seamless rental experience.
+  
+## Prerequisities
+
+### **Node.js and npm/yarn installed on your machine **
+  Note: It is crucial to have Node.js and npm/yarn installed on your machine to run the project locally. If you don't have them installed, please follow the instructions below:
+    -.Install Node.js
+    -.Install Yarn (recommended) or use npm
 
 ## Run in local
 
