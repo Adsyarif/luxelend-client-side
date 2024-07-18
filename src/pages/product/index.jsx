@@ -181,7 +181,7 @@ export function ProductPage() {
                 ) : (
                   <a
                     className="w-4/6 text-center px-3 py-1 rounded-md text-white font-semibold bg-gradient-to-r from-lightBrown from-10% to-darkBrown hover:text-black"
-                    href={`https://wa.me/08231231412?text=I want to rent this product ${product.name}`}
+                    href={`https://api.whatsapp.com/send/?phone=${6285603770067}&text=%22Halo, aku mau sewa brand ${brandProperty.property.value} dengan produk ${product.name} untuk tanggal <<tulis tanggal disini>>%22&type=phone_number&app_absent=0`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
