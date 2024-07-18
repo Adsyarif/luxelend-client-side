@@ -1,12 +1,13 @@
 import { CategoryCard } from "@/components/categories";
 import { Header, BackButton } from "@/components/common";
 import { useEffect, useState } from "react";
+import config from "@/config";
 
 const Categories = () => {
   const [category, setCategory] = useState([]);
 
   useEffect(() => {
-    fetch('https://luxelend-production.up.railway.app/gender_category')
+    fetch(`${config.BASE_URL}/gender_category`)
       .then(response => response.json())
       .then(data => {
    

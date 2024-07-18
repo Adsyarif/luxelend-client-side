@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import config from "@/config";
 
 export function Carousel({ gender, product_id }) {
   const [imageUrls, setImageUrls] = useState([]);
@@ -11,7 +12,7 @@ export function Carousel({ gender, product_id }) {
     const fetchImageURL = async () => {
       try {
         const response = await axios.get(
-          `https://luxelend-production.up.railway.app/product/${product_id}`
+          `${config.BASE_URL}/product/${product_id}`
         );
         setImageUrls(response.data.data.product_images);
         setLoading(false);
