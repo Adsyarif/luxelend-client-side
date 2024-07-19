@@ -19,25 +19,26 @@ Urban’s premier luxury fashion rental platform
    - [Libraries and Dependencies](#libraries-and-dependencies)
    - [Database](#database)
    - [Design Tools](#design-tools)
-6. [Pages](#pages)
+6. [User FLow](#user-flow)
+7. [Pages](#pages)
    - [Homepage](#homepage-)
    - [Category Page](#category-page-)
    - [Results Page](#results-page-based-on-gender-and-categories)
    - [Product Detail Page](#product-detail-page--product_id-)
-7. [Feature](#feature)
+8. [Feature](#feature)
    - [Filtering Option](#filtering-option)
    - [Sorting Functionality](#sorting-functionality)
    - [WhatsApp Integration for Rental](#whatsapp-integration-for-rental)
-8. [Prerequisites](#prerequisites)
-9. [Run in Local](#run-in-local)
+9. [Prerequisites](#prerequisites)
+10. [Run in Local](#run-in-local)
    - [Clone or Pulling from Repo](#clone-or-pulling-from-repo)
    - [Optional Checkout](#optional)
    - [Install Dependency](#instal-dependency)
    - [Run](#run)
    - [Test Build/Deployment](#test-builddeployment)
-10. [Folder Structure](#folder-structure)
-11. [Future Development Features](#future-development-features)
-12. [Team Developer]()
+11. [Folder Structure](#folder-structure)
+12. [Features](#features)
+13. [Team Developer]()
 
 
 ## Problem Statement
@@ -78,6 +79,10 @@ Urban’s premier luxury fashion rental platform
 ### Design Tools 
 
 - Figma
+
+## User Flow
+
+![User Flow](./src/assets/doc/userFlow.png)
 
 ## Pages
 
@@ -227,18 +232,24 @@ src:
 ![Product Detail Page](./src/assets/doc/diagramArchitecture.png)
 
 
-## Future Development Features
+## Features
 
-### Popular Products and Rented Data Integration
+### User Membership
 
-In our ongoing efforts to enhance user experience and provide more valuable insights, we are planning to integrate features that showcase popular products. These enhancements will aim to offer users a more engaging and informative shopping experience. Below are the key features we plan to implement:
+- **Login / Register**: Implement functionality for user membership, allowing users to create accounts, log in, and save their preferred products. This feature will enhance the user experience by personalizing interactions and enabling users to track their favorite items. Users will have the ability to securely register, log in, and manage their profile information, providing a personalized shopping experience.
 
-#### **Displaying Popular Products**
+### Transaction History
 
-To better serve our users, we will introduce a new section dedicated to displaying popular products. This feature will be based on various metrics such as user interactions, sales data, and product ratings. By highlighting popular products, we aim to help users discover trending items and make informed purchasing decisions. The implementation details include:
-- **Popularity Metrics**: Utilize metrics like the number of rentals, user ratings, and sales volume to determine product popularity.
-- **Dynamic Display**: Design a dynamic section on the homepage or a dedicated page to showcase these products.
-- **User Interaction**: Incorporate user feedback and interaction data to continually refine the list of popular products.
+- **Implementasi Tabel Transaksi**: Add a transaction table to store and display the transaction history of users. This feature will allow users to review their past purchases and track their order history, contributing to better account management and user satisfaction. The transaction history will include details such as order date, items purchased, total amount, and order status, helping users keep track of their shopping activities and manage their expenditures.
+
+### Product Search
+
+- **Implementasi Search Product**: Integrate a search functionality into the header of the application, allowing users to quickly find products they are interested in. This feature will provide users with a search button and a search bar where they can enter keywords to locate specific products. The search functionality will include:
+  - **Search Bar**: A user-friendly input field in the header where users can type in search queries.
+  - **Real-Time Suggestions**: Display suggestions or autocomplete options as users type to help them find products faster.
+  - **Search Results**: Present relevant product results based on the search query, with the ability to filter or sort the results to refine their search.
+
+
 
 ## Team Developer
 
