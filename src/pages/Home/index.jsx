@@ -6,7 +6,6 @@ import {
   FeaturesCard,
 } from "@/components/Home";
 import config from "@/config";
-import brands from "@/data/brandList.json";
 import servicesData from "@/data/servicesList.json";
 import { Link } from "react-router-dom";
 import React, { useEffect, useState } from 'react';
@@ -43,8 +42,8 @@ export function HomePages() {
         ))}
       </div>
       <HomeBanner />
-      <BrandLineup items={brands} />
-      <FeaturesCard items={servicesData} />
+      <BrandLineup />
+      <FeaturesCard/>
       <NavbarButton />
     </div>
   );
