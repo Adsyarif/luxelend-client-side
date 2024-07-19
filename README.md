@@ -2,6 +2,10 @@
 
 “Luxeland: Elevating Your Style, Redefining Luxury Rentals."
 
+Luxelend primarily focuses on collections from renowned brands and famous designers, ensuring users easily access high-end fashion choices.
+
+With available gender categories (men or women), users can easily tailor their search to their fashion needs. Through Luxelend access to high-end clothing no longer requires a trip to physical stores, as all these exclusive products can be quickly found and obtained through this mobile application.
+
 Urban’s premier luxury fashion rental platform
 
 ## Table of Contents
@@ -13,6 +17,8 @@ Urban’s premier luxury fashion rental platform
 5. [Tech Stack](#tech-stack)
    - [Languages](#languages)
    - [Libraries and Dependencies](#libraries-and-dependencies)
+   - [Database](#database)
+   - [Design Tools](#design-tools)
 6. [Pages](#pages)
    - [Homepage](#homepage-)
    - [Category Page](#category-page-)
@@ -29,7 +35,9 @@ Urban’s premier luxury fashion rental platform
    - [Install Dependency](#instal-dependency)
    - [Run](#run)
    - [Test Build/Deployment](#test-builddeployment)
-10. [React + Vite](#react--vite)
+10. [Folder Structure](#folder-structure)
+11. [Future Development Features](#future-development-features)
+12. [Team Developer]()
 
 
 ## Problem Statement
@@ -43,8 +51,8 @@ Urban’s premier luxury fashion rental platform
 
 ## Deployment
 
-- Link :
-- Platform :
+- Backend Repository : https://github.com/desyasarbini/Luxelend-server
+- Platform : https://luxelend-client-side.vercel.app/
 
 ## Tech stack
 
@@ -63,24 +71,39 @@ Urban’s premier luxury fashion rental platform
 - Axios
 - Tailwind CSS
 
+### Database
+
+- Supabase (PostgreSQL)
+
+### Design Tools 
+
+- Figma
+
 ## Pages
 
 - Homepage = "/"
+
   ![Home Page](./src/assets/doc/homePage.png)
+
   **Usage**: Explore featured items and navigate through different sections of the platform such as banner, product links and search feature (to be implement)
 
 - Category Page = "/category"
+
   ![Category Page](./src/assets/doc/categoryPage.png)
+
   **Usage**: Browse items based on specific categories divided based on the gender and user can choose what kind of categories they looking for.
 
 - Results page (Based on gender and categories)
 
   - "/:gender" , example : "/men" or "/women"
   - "/:category/:gender", example : "tops/women"
+
     ![Results Page](./src/assets/doc/resultsPage.png)
+
   **Usage**: After choosing which gender are they, user can manually filter spesific things for instance: Filter base on size, color and etc. (Read feature section)
 
 - Product detail page : "/productDetail/:product_id" , example : "productDetail/35"
+
   ![Product Detail Page](./src/assets/doc/productDetailPage.png)
 
 ## Feature
@@ -131,11 +154,111 @@ yarn dev
 yarn build  
 yarn preview
 
-# React + Vite
+## Folder Structure
+Here is the folder structure of the project:
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+```
+src:
+│
+├───assets
+│ ├───doc
+│ │ - (Related documents)
+│ ├───icons
+│ │ - (Application icons)
+│ └───image
+│ - (Application images)
+│
+├───components
+│ ├───categories
+│ │ ├───CategoryCard
+│ │ └───ListCard
+│ ├───common
+│ │ ├───BackButton
+│ │ ├───Banner
+│ │ ├───BottomNavbar
+│ │ ├───Button
+│ │ ├───Card
+│ │ ├───Header
+│ │ └───NavbarButton
+│ ├───Home
+│ │ ├───BrandLineup
+│ │ ├───FeaturesCard
+│ │ ├───HomeBanner
+│ │ └───WelcomeBanner
+│ ├───ProductDetail
+│ │ ├───Carousel
+│ │ ├───ShareButton
+│ │ ├───StickyRent
+│ │ └───TableSizeDetail
+│ └───Products
+│ └───Filter
+│
+├───contexts
+│ - (React contexts for global state)
+│
+├───data
+│ - (Static or application data)
+│
+├───pages
+│ ├───Categories
+│ ├───Home
+│ ├───Product
+│ └───ProductDetail
+│
+└───utils
+```
 
-Currently, two official plugins are available:
+### Notes:
+- **`assets`**: Contains static resources such as documents, icons, and images.
+- **`components`**: Reusable React components categorized by their functionality.
+  - **`categories`**: Components related to categories.
+  - **`common`**: Commonly used UI components.
+  - **`Home`**: Components specific to the home page.
+  - **`ProductDetail`**: Components for the product detail page.
+  - **`Products`**: Components related to product listings and filters.
+- **`contexts`**: React contexts for managing global state.
+- **`data`**: Static or application-specific data.
+- **`pages`**: Components representing different pages in the application.
+- **`utils`**: Utility functions and helpers.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Diagram Architecture
+
+![Product Detail Page](./src/assets/doc/diagramArchitecture.png)
+
+
+## Future Development Features
+
+### Popular Products and Rented Data Integration
+
+In our ongoing efforts to enhance user experience and provide more valuable insights, we are planning to integrate features that showcase popular products. These enhancements will aim to offer users a more engaging and informative shopping experience. Below are the key features we plan to implement:
+
+#### **Displaying Popular Products**
+
+To better serve our users, we will introduce a new section dedicated to displaying popular products. This feature will be based on various metrics such as user interactions, sales data, and product ratings. By highlighting popular products, we aim to help users discover trending items and make informed purchasing decisions. The implementation details include:
+- **Popularity Metrics**: Utilize metrics like the number of rentals, user ratings, and sales volume to determine product popularity.
+- **Dynamic Display**: Design a dynamic section on the homepage or a dedicated page to showcase these products.
+- **User Interaction**: Incorporate user feedback and interaction data to continually refine the list of popular products.
+
+## Team Developer
+
+Here is the list of our development team members:
+
+Project Team:
+
+1. Muhammad Adrisa Nur Syarif (Frontend Engineer)
+
+Frontend Engineer:
+
+1. Alfath Bagus Kurnia 	
+2. Christopher Jordan Lan Garcia
+3. Egbert Felica Wibianto
+4. Meirth Maulida Hartanti
+5. Muhammad Umar
+6. Siti Mujayanah					
+7. Widia Puspitasari 
+
+Backend Engineer:
+1. Desya Saskia Sarbini
+2. Widia Puspitasari (support)
+
+
