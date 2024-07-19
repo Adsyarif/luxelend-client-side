@@ -88,7 +88,7 @@ Urban’s premier luxury fashion rental platform
 
 - Homepage = "/"
 
-  ![Home Page](./src/assets/doc/HomePagePreview.png)
+  ![Home Page](./src/assets/doc/homePage.png)
 
   **Usage**: Explore featured items and navigate through different sections of the platform such as banner, product links and search feature (to be implement)
 
