@@ -26,6 +26,7 @@ export function ProductPage() {
     sortOrder: 'newest',
     categoryFilter: '',
   });
+  const [filtering, setFiltering] = useState(false);
 
   const currency = new Intl.NumberFormat('en-EN', {
     style: 'currency',
@@ -54,6 +55,7 @@ export function ProductPage() {
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       try {
         const response = await axios.get(`${config.BASE_URL}/product`);
 
@@ -114,7 +116,7 @@ export function ProductPage() {
   const renderBannerCategory = gender && category;
 
   return (
-    <div className="max-w-screen-sm mx-auto md:max-w-2xl border-none ">
+    <div className="max-w-screen-sm mx-auto md:max-w-2xl border-none">
       <Header />
       {!(gender && category) && (
         <div className="m-0 border-none flex h-32 flex-col text-center justify-center gap-2 text-white relative">
@@ -123,7 +125,7 @@ export function ProductPage() {
             alt={gender === 'women' ? 'Women Hero' : 'Men Hero'}
             className="absolute top-0 left-0 w-full h-full object-cover"
           />
-          <div className="relative z-10">
+          <div className="relative z-1">
             <p className="text-sm">Category</p>
             <h2 className="text-center font-bold">
               {gender === 'women' ? 'Women Products' : 'Men Products'}
@@ -140,7 +142,7 @@ export function ProductPage() {
             className="absolute top-0 left-0 w-full h-full object-cover"
           />
           <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50"></div>
-          <div className="relative z-10">
+          <div className="relative z-1">
             <p className="text-sm">{gender}</p>
             <h2 className="font-bold text-center">{category}</h2>
           </div>
@@ -148,75 +150,79 @@ export function ProductPage() {
       )}
 
       <div className="p-4 border-none flex justify-between">
-        <Filter setFilters={setFilters} category={category} gender={gender} />
+        <Filter setFilters={setFilters} category={category} gender={gender} setFiltering={setFiltering} />
         <div className="flex items-center p-5">
           {!loading && !error && <p className="ml-auto">{productData.length} Result</p>}
         </div>
       </div>
-      {!loading && !error && productData.length === 0 && (
-        <p className="ml-auto">No products match the selected filters.</p>
-      )}
 
-      {loading && (
-        <div className="flex flex-col justify-center items-center ">
+      {(loading || filtering) && (
+        <div className="flex flex-col justify-center items-center">
           <img src={loadingGif} alt="Loading..." className="w-16 h-16" />
           <p>Loading</p>
         </div>
       )}
 
-      <div className="p-5 border-none grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-3">
-        {productData.map((product) => {
-          const brandProperty = product.product_properties.find(
-            (prop) => prop.property && prop.property.property_category_id === 3
-          );
-          const stock = parseInt(product.stock);
-          const isOutOfStock = stock === 0;
-          return (
-            <div key={product.id} className="max-w-xs">
-              <Link to={`/productDetail/${product.id}`}>
-                <div className="border-none p-3">
-                  <div>
-                    <img
-                      className="object-cover w-full h-72 rounded-md shadow-xl"
-                      src={product.product_images[0].value}
-                      alt={product.name}
-                    />
+      {!loading && !filtering && !error && productData.length === 0 && (
+        <p className="ml-auto">No products match the selected filters.</p>
+      )}
+
+      {!loading && !filtering && !error && (
+        <div className="p-5 border-none grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-3">
+          {productData.map((product) => {
+            const brandProperty = product.product_properties.find(
+              (prop) => prop.property && prop.property.property_category_id === 3
+            );
+            const stock = parseInt(product.stock);
+            const isOutOfStock = stock === 0;
+            return (
+              <div key={product.id} className="max-w-xs">
+                <Link to={`/productDetail/${product.id}`}>
+                  <div className="border-none p-3">
+                    <div>
+                      <img
+                        className="object-cover w-full h-72 rounded-md shadow-xl"
+                        src={product.product_images[0].value}
+                        alt={product.name}
+                      />
+                    </div>
+                    <div className="p-2">
+                      {brandProperty && (
+                        <p className="text-xs capitalize">{brandProperty.property.value}</p>
+                      )}
+                      <p className="text-xs pb-2 capitalize">{product.name}</p>
+                      <p className="font-semibold text-xs">
+                        Rent for {currency.format(product.rented_price)}
+                      </p>
+                      <p className="text-xs">Retail Value {currency.format(product.retail_price)}</p>
+                    </div>
                   </div>
-                  <div className="p-2">
-                    {brandProperty && (
-                      <p className="text-xs capitalize">{brandProperty.property.value}</p>
-                    )}
-                    <p className="text-xs pb-2 capitalize">{product.name}</p>
-                    <p className="font-semibold text-xs">
-                      Rent for {currency.format(product.rented_price)}
-                    </p>
-                    <p className="text-xs">Retail Value {currency.format(product.retail_price)}</p>
-                  </div>
+                </Link>
+                <div className="flex justify-center pt-5">
+                  {isOutOfStock ? (
+                    <button
+                      className="w-4/6 text-center px-3 py-1 rounded-md text-white font-semibold bg-gray cursor-not-allowed"
+                      disabled
+                    >
+                      Out of Stock
+                    </button>
+                  ) : (
+                    <a
+                      className="w-4/6 text-center px-3 py-1 rounded-md text-white font-semibold bg-gradient-to-r from-lightBrown from-10% to-darkBrown hover:text-black"
+                      href={`https://api.whatsapp.com/send/?phone=${6285603770067}&text=%22Halo, aku mau sewa brand ${brandProperty.property.value} dengan produk ${product.name} untuk tanggal <<tulis tanggal disini>>%22&type=phone_number&app_absent=0`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Rent Now
+                    </a>
+                  )}
                 </div>
-              </Link>
-              <div className="flex justify-center pt-5">
-                {isOutOfStock ? (
-                  <button
-                    className="w-4/6 text-center px-3 py-1 rounded-md text-white font-semibold bg-gray cursor-not-allowed"
-                    disabled
-                  >
-                    Out of Stock
-                  </button>
-                ) : (
-                  <a
-                    className="w-4/6 text-center px-3 py-1 rounded-md text-white font-semibold bg-gradient-to-r from-lightBrown from-10% to-darkBrown hover:text-black"
-                    href={`https://api.whatsapp.com/send/?phone=${6285603770067}&text=%22Halo, aku mau sewa brand ${brandProperty.property.value} dengan produk ${product.name} untuk tanggal <<tulis tanggal disini>>%22&type=phone_number&app_absent=0`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Rent Now
-                  </a>
-                )}
               </div>
-            </div>
-          );
-        })}
-      </div>
+            );
+          })}
+        </div>
+      )}
+
       <NavbarButton />
     </div>
   );
