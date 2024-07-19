@@ -1,6 +1,9 @@
 import { AppContext } from "../../../contexts/Context";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { upperCaseFirstCharacter } from "../../../utils/buttonClick";
+import categoryHeroBg from '@/assets/image/categoryHeroBg.webp';
+import womenHeroBg from '@/assets/image/womenHeroBg.webp';
+import menHeroBg from '@/assets/image/menHeroBg.webp';
 
 const Banner = ({ gender }) => {
   const { user } = useContext(AppContext);
@@ -19,13 +22,7 @@ const Banner = ({ gender }) => {
     "backdrop-brightness-20",
   ];
 
-  if (user.category) {
-    bannerClass.push("bg-[url('categoryHeroBg.webp')]");
-  } else {
-    gender === "2"
-      ? bannerClass.push("bg-[url('womenHeroBg.webp')]")
-      : bannerClass.push("bg-[url('menHeroBg.webp')]");
-  }
+  const backgroundImage = user.category ? categoryHeroBg : (gender === "2" ? womenHeroBg : menHeroBg);
 
   const conditionalBanner = (text) => {
     if (text === "View All Styles") {
@@ -39,7 +36,7 @@ const Banner = ({ gender }) => {
   };
 
   return (
-    <div className={bannerClass.join(" ")}>
+    <div className={bannerClass.join(" ")} style={{ backgroundImage: `url(${backgroundImage})` }}>
       {user.category ? (
         <div className="text-white flex justify-center flex-col items-center backdrop-brightness-50 h-32">
           <h2 className="text-lg">{conditionalBanner(user.gender)}</h2>
