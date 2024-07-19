@@ -4,7 +4,11 @@ import axios from 'axios';
 import config from "@/config";
 import { NavbarButton, Header } from "@/components/common";
 import Filter from "@/components/Products/filter";
-import loadingGif from "@/assets/icons/loading.gif"
+import loadingGif from "@/assets/icons/loading.gif";
+import womenHeroBg from '@/assets/image/womenHeroBg.webp';
+import menHeroBg from '@/assets/image/menHeroBg.webp';
+import categoryHeroBg from '@/assets/image/categoryHeroBg.webp';
+import categoryMenBg from '@/assets/image/categoryMenBg.webp';
 
 export function ProductPage() {
   const { gender, category } = useParams();
@@ -22,16 +26,17 @@ export function ProductPage() {
     sortOrder: 'newest',
     categoryFilter: '',
   });
+  const [filtering, setFiltering] = useState(false);
 
   const currency = new Intl.NumberFormat('en-EN', {
     style: 'currency',
-    currency: 'IDR'
+    currency: 'IDR',
   });
 
   const sortProducts = (products, sortOrder) => {
     const sortMap = {
       newest: (a, b) => new Date(b.created_at) - new Date(a.created_at),
-      popular: (a, b) => b.stock - a.stock, 
+      popular: (a, b) => b.stock - a.stock,
       highToLow: (a, b) => b.rented_price - a.rented_price,
       lowToHigh: (a, b) => a.rented_price - b.rented_price,
     };
@@ -39,28 +44,31 @@ export function ProductPage() {
   };
 
   const filterProductsByProperty = (products, propertyCategory, filterValue) => {
-    return products.filter(product => {
-      return product.product_properties.some(prop =>
-        prop.property.property_category_id === propertyCategory && prop.property.value === filterValue
+    return products.filter((product) => {
+      return product.product_properties.some(
+        (prop) =>
+          prop.property.property_category_id === propertyCategory &&
+          prop.property.value === filterValue
       );
     });
   };
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       try {
         const response = await axios.get(`${config.BASE_URL}/product`);
-  
+
         if (Array.isArray(response.data.products) && response.data.products.length > 0) {
           const allProducts = response.data.products;
           setTotalProductCount(allProducts.length);
-  
-          let filteredProducts = allProducts.filter(product => {
+
+          let filteredProducts = allProducts.filter((product) => {
             return product.gender_category.gender.name.toLowerCase() === gender;
           });
 
           if (category && category !== 'all') {
-            filteredProducts = filteredProducts.filter(product => {
+            filteredProducts = filteredProducts.filter((product) => {
               return product.category.name.toLowerCase() === category.toLowerCase();
             });
           }
@@ -77,17 +85,19 @@ export function ProductPage() {
           if (filters.styleFilter) {
             filteredProducts = filterProductsByProperty(filteredProducts, 4, filters.styleFilter);
             if (gender === 'men') {
-              filteredProducts = filteredProducts.concat(filterProductsByProperty(allProducts, 6, filters.styleFilter));
+              filteredProducts = filteredProducts.concat(
+                filterProductsByProperty(allProducts, 6, filters.styleFilter)
+              );
             }
           }
           if (filters.materialFilter) {
             filteredProducts = filterProductsByProperty(filteredProducts, 5, filters.materialFilter);
           }
           if (filters.availableNow) {
-            filteredProducts = filteredProducts.filter(product => parseInt(product.stock) > 0);
+            filteredProducts = filteredProducts.filter((product) => parseInt(product.stock) > 0);
           }
           filteredProducts = sortProducts(filteredProducts, filters.sortOrder);
-  
+
           setProductData(filteredProducts);
         } else {
           setError('No product data available');
@@ -99,101 +109,120 @@ export function ProductPage() {
         setLoading(false);
       }
     };
-  
+
     fetchData();
   }, [gender, filters, category]);
-
 
   const renderBannerCategory = gender && category;
 
   return (
-    <div className="max-w-screen-sm mx-auto md:max-w-2xl border-none ">
+    <div className="max-w-screen-sm mx-auto md:max-w-2xl border-none">
       <Header />
       {!(gender && category) && (
-        <div className={`m-0 border-none flex h-32 flex-col text-center justify-center gap-2 text-white bg-center bg-no-repeat bg-cover ${gender === 'women' ? 'bg-[url("/src/assets/image/womenHeroBg.webp")]' : 'bg-[url("/src/assets/image/menHeroBg.webp")]'}`}>
-          <p className="text-sm">Category</p>
-          <h2 className='text-center font-bold'>{gender === 'women' ? 'Women Products' : 'Men Products'}</h2>
+        <div className="m-0 border-none flex h-32 flex-col text-center justify-center gap-2 text-white relative">
+          <img
+            src={gender === 'women' ? womenHeroBg : menHeroBg}
+            alt={gender === 'women' ? 'Women Hero' : 'Men Hero'}
+            className="absolute top-0 left-0 w-full h-full object-cover"
+          />
+          <div className="relative z-1">
+            <p className="text-sm">Category</p>
+            <h2 className="text-center font-bold">
+              {gender === 'women' ? 'Women Products' : 'Men Products'}
+            </h2>
+          </div>
         </div>
       )}
 
       {renderBannerCategory && (
-        <div className="capitalize relative m-0 border-none flex h-32 flex-col text-center justify-center gap-2 text-white bg-[url('/src/assets/image/categoryHeroBg.webp')]"
-        style={{
-          backgroundImage: `url('/src/assets/image/${gender === 'men' ? 'categoryMen' : 'categoryHero'}Bg.webp')`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          color: 'white', 
-        }}
-        >
+        <div className="capitalize relative m-0 border-none flex h-32 flex-col text-center justify-center gap-2 text-white">
+          <img
+            src={gender === 'men' ? categoryMenBg : categoryHeroBg}
+            alt={gender === 'men' ? 'Category Men Hero' : 'Category Hero'}
+            className="absolute top-0 left-0 w-full h-full object-cover"
+          />
           <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50"></div>
-          <p className="text-sm z-1 relative">{gender}</p>
-          <h2 className='font-bold text-center z-1 relative'>{category}</h2>
+          <div className="relative z-1">
+            <p className="text-sm">{gender}</p>
+            <h2 className="font-bold text-center">{category}</h2>
+          </div>
         </div>
       )}
-      
+
       <div className="p-4 border-none flex justify-between">
-      <Filter setFilters={setFilters} category={category} gender={gender} />
+        <Filter setFilters={setFilters} category={category} gender={gender} setFiltering={setFiltering} />
         <div className="flex items-center p-5">
-          {!loading && !error && <p className='ml-auto'>{productData.length} Result</p>}
+          {!loading && !error && <p className="ml-auto">{productData.length} Result</p>}
         </div>
       </div>
-      {!loading && !error && productData.length === 0 && <p className='ml-auto'>No products match the selected filters.</p>}
-      
-      {loading && (
-        <div className="flex flex-col justify-center items-center ">
+
+      {(loading || filtering) && (
+        <div className="flex flex-col justify-center items-center">
           <img src={loadingGif} alt="Loading..." className="w-16 h-16" />
           <p>Loading</p>
         </div>
       )}
 
-      <div className="p-5 border-none grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-3">
-        
+      {!loading && !filtering && !error && productData.length === 0 && (
+        <p className="ml-auto">No products match the selected filters.</p>
+      )}
 
-        {productData.map((product) => {
+      {!loading && !filtering && !error && (
+        <div className="p-5 border-none grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-3">
+          {productData.map((product) => {
             const brandProperty = product.product_properties.find(
               (prop) => prop.property && prop.property.property_category_id === 3
             );
-            const stock = parseInt(product.stock); 
+            const stock = parseInt(product.stock);
             const isOutOfStock = stock === 0;
-          return (
-            <div key={product.id} className="max-w-xs">
-              <Link to={`/productDetail/${product.id}`}>
-                <div className="border-none p-3">
-                  <div>
-                    <img className="object-cover w-full h-72 rounded-md shadow-xl " src={product.product_images[0].value} alt={product.name} />
+            return (
+              <div key={product.id} className="max-w-xs">
+                <Link to={`/productDetail/${product.id}`}>
+                  <div className="border-none p-3">
+                    <div>
+                      <img
+                        className="object-cover w-full h-72 rounded-md shadow-xl"
+                        src={product.product_images[0].value}
+                        alt={product.name}
+                      />
+                    </div>
+                    <div className="p-2">
+                      {brandProperty && (
+                        <p className="text-xs capitalize">{brandProperty.property.value}</p>
+                      )}
+                      <p className="text-xs pb-2 capitalize">{product.name}</p>
+                      <p className="font-semibold text-xs">
+                        Rent for {currency.format(product.rented_price)}
+                      </p>
+                      <p className="text-xs">Retail Value {currency.format(product.retail_price)}</p>
+                    </div>
                   </div>
-                  <div className="p-2">
-                    {brandProperty && <p className="text-xs capitalize">{brandProperty.property.value}</p>}
-                    <p className="text-xs pb-2 capitalize">{product.name}</p>
-                    <p className="font-semibold text-xs">Rent for {currency.format(product.rented_price)}</p>
-                    <p className="text-xs">Retail Value {currency.format(product.retail_price)}</p>
-                  </div>
+                </Link>
+                <div className="flex justify-center pt-5">
+                  {isOutOfStock ? (
+                    <button
+                      className="w-4/6 text-center px-3 py-1 rounded-md text-white font-semibold bg-gray cursor-not-allowed"
+                      disabled
+                    >
+                      Out of Stock
+                    </button>
+                  ) : (
+                    <a
+                      className="w-4/6 text-center px-3 py-1 rounded-md text-white font-semibold bg-gradient-to-r from-lightBrown from-10% to-darkBrown hover:text-black"
+                      href={`https://api.whatsapp.com/send/?phone=${6285603770067}&text=%22Halo, aku mau sewa brand ${brandProperty.property.value} dengan produk ${product.name} untuk tanggal <<tulis tanggal disini>>%22&type=phone_number&app_absent=0`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Rent Now
+                    </a>
+                  )}
                 </div>
-              </Link>
-              <div className="flex justify-center pt-5">
-                {isOutOfStock ? (
-                  <button
-                    className="w-4/6 text-center px-3 py-1 rounded-md text-white font-semibold bg-gray cursor-not-allowed"
-                    disabled
-                  >
-                    Out of Stock
-                  </button>
-                ) : (
-                  <a
-                    className="w-4/6 text-center px-3 py-1 rounded-md text-white font-semibold bg-gradient-to-r from-lightBrown from-10% to-darkBrown hover:text-black"
-                    href={`https://wa.me/08231231412?text=I want to rent this product ${product.name}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Rent Now
-                  </a>
-                )}
               </div>
-              
-            </div>
-          );
-        })}
-      </div>
+            );
+          })}
+        </div>
+      )}
+
       <NavbarButton />
     </div>
   );

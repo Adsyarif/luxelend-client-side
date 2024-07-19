@@ -54,6 +54,7 @@ export function ProductDetail() {
     const property = productDetail.product_properties.find(
       prop => prop.property && categoryIds.includes(prop.property.property_category_id)
     );
+    
     return property ? property.property.value : null;
   };
 
@@ -101,7 +102,7 @@ export function ProductDetail() {
         </ul>
         <TableSizeGuide />
       </div>
-      <StickyRent />
+      <StickyRent brand={getProductProperty([3])} productName={productDetail.name} />
     </div>
   );
 }

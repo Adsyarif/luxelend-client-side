@@ -1,5 +1,5 @@
 import { Card } from "../../common/Card";
-import LuxelendLogo from "../../../assets/image/luxelend-logo.webp";
+import LuxelendLogo from "@/assets/image/luxelend-logo.webp";
 
 export function WelcomeBanner() {
   return (

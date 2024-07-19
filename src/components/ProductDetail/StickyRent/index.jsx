@@ -4,9 +4,9 @@ import { useParams } from "react-router-dom";
 import { Card } from "@/components/common";
 import config from "@/config";
 
-export function StickyRent() {
+export function StickyRent({brand, productName}) {
   const whatsappLink =
-    "https://wa.me/08231231412?text=I want to rent this product";
+    `https://api.whatsapp.com/send/?phone=${6285603770067}&text=%22Halo, aku mau sewa brand ${brand} dengan produk ${productName} untuk tanggal <<tulis tanggal disini>>%22&type=phone_number&app_absent=0`;
   const { gender, product_id } = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
