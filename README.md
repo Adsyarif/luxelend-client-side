@@ -37,7 +37,7 @@ Urban’s premier luxury fashion rental platform
    - [Run](#run)
    - [Test Build/Deployment](#test-builddeployment)
 11. [Folder Structure](#folder-structure)
-12. [Features](#features)
+12. [Future Development Features](#future-development-features)
 13. [Team Developer]()
 
 
@@ -88,7 +88,7 @@ Urban’s premier luxury fashion rental platform
 
 - Homepage = "/"
 
-  ![Home Page](./src/assets/doc/homePage.png)
+  ![Home Page](./src/assets/doc/HomePagePreview.png)
 
   **Usage**: Explore featured items and navigate through different sections of the platform such as banner, product links and search feature (to be implement)
 
@@ -232,7 +232,7 @@ src:
 ![Product Detail Page](./src/assets/doc/diagramArchitecture.png)
 
 
-## Features
+## Future Development Features
 
 ### User Membership
 
